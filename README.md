@@ -10,7 +10,7 @@ Following are the steps to integrate this project on your system,
 
 * Open Microsoft SQL Server Managenent Studio and make Windows Authentication connection
 * Right Click on Databases Folder and click on attach option
-* A attach database pop up will open. Now click on Add option to select the CMS_db_script.mdf file from the desired location.
+* A attach database pop up will open. Now click on Add option to select the CMS.mdf file from the desired location.
 * Now you are ready with your data base having table ContactList with dummy entries in it.
 
 ### 2) Project Setup
