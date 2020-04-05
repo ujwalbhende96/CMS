@@ -14,50 +14,45 @@ namespace CMS.WebAPI.Controllers
 {
     public class CMSController : ApiController
     {
-        private CMSEntities db = new CMSEntities();
+        private CMSEntities cmsEntities = new CMSEntities();
 
         // GET: api/CMS
-        public IQueryable<ContactInformation> GetContactInformations()
+        public IQueryable<ContactList> GetContactLists()
         {
-            return db.ContactInformations;
+            return cmsEntities.ContactLists;
         }
 
         // GET: api/CMS/5
-        [ResponseType(typeof(ContactInformation))]
-        public IHttpActionResult GetContactInformation(int id)
+        [ResponseType(typeof(ContactList))]
+        public IHttpActionResult GetContactList(int id)
         {
-            ContactInformation contactInformation = db.ContactInformations.Find(id);
-            if (contactInformation == null)
+            ContactList ContactList = cmsEntities.ContactLists.Find(id);
+            if (ContactList == null)
             {
                 return NotFound();
             }
 
-            return Ok(contactInformation);
+            return Ok(ContactList);
         }
 
         // PUT: api/CMS/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutContactInformation(int id, ContactInformation contactInformation)
+        public IHttpActionResult PutContactList(int id, ContactList ContactList)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != contactInformation.Id)
+            if (id != ContactList.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(contactInformation).State = EntityState.Modified;
+            cmsEntities.Entry(ContactList).State = EntityState.Modified;
 
             try
             {
-                db.SaveChanges();
+                cmsEntities.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ContactInformationExists(id))
+                if (!ContactListExists(id))
                 {
                     return NotFound();
                 }
@@ -71,48 +66,43 @@ namespace CMS.WebAPI.Controllers
         }
 
         // POST: api/CMS
-        [ResponseType(typeof(ContactInformation))]
-        public IHttpActionResult PostContactInformation(ContactInformation contactInformation)
+        [ResponseType(typeof(ContactList))]
+        public IHttpActionResult PostContactList(ContactList ContactList)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            cmsEntities.ContactLists.Add(ContactList);
+            cmsEntities.SaveChanges();
 
-            db.ContactInformations.Add(contactInformation);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = contactInformation.Id }, contactInformation);
+            return CreatedAtRoute("DefaultApi", new { id = ContactList.Id }, ContactList);
         }
 
         // DELETE: api/CMS/5
-        [ResponseType(typeof(ContactInformation))]
-        public IHttpActionResult DeleteContactInformation(int id)
+        [ResponseType(typeof(ContactList))]
+        public IHttpActionResult DeleteContactList(int id)
         {
-            ContactInformation contactInformation = db.ContactInformations.Find(id);
-            if (contactInformation == null)
+            ContactList ContactList = cmsEntities.ContactLists.Find(id);
+            if (ContactList == null)
             {
                 return NotFound();
             }
 
-            db.ContactInformations.Remove(contactInformation);
-            db.SaveChanges();
+            cmsEntities.ContactLists.Remove(ContactList);
+            cmsEntities.SaveChanges();
 
-            return Ok(contactInformation);
+            return Ok(ContactList);
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                db.Dispose();
+                cmsEntities.Dispose();
             }
             base.Dispose(disposing);
         }
 
-        private bool ContactInformationExists(int id)
+        private bool ContactListExists(int id)
         {
-            return db.ContactInformations.Count(e => e.Id == id) > 0;
+            return cmsEntities.ContactLists.Count(e => e.Id == id) > 0;
         }
     }
 }

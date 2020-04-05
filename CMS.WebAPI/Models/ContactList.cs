@@ -12,13 +12,12 @@ namespace CMS.WebAPI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ContactInformation
+    public partial class ContactList
     {
         public int Id { get; set; }
-        public string First_Name { get; set; }
-        public string Last_Name { get; set; }
-        public string Email { get; set; }
-        public string Phone_No_ { get; set; }
-        public bool Status { get; set; }
+        public string firstName { get; set; }
+        public string lastName { get; set; }
+        public string emailAddress { get; set; }
+        public string mobileNo { get; set; }
     }
 }

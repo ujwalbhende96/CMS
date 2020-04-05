@@ -25,6 +25,6 @@ namespace CMS.WebAPI.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<ContactInformation> ContactInformations { get; set; }
+        public virtual DbSet<ContactList> ContactLists { get; set; }
     }
 }
