@@ -7,49 +7,36 @@
 <div class="container">
     <div class="form-horizontal">
         @using (Html.BeginForm("InsertUpdateNewContact", "Home", FormMethod.Post))
-        { @Html.HiddenFor(model => model.Id)   <div class="form-group">
+        { @Html.HiddenFor(m => m.Id)   <div class="form-group">
             <label class="control-label col-sm-2" for="firstName">First Name:</label>
             <div class="col-sm-10">
-                @Html.EditorFor(m => m.firstName, new { id = "firstName", @class = "form-control" })
+                <input type="text" class="form-control" name="firstName" id="firstName" value='@Model.firstName' placeholder="Enter First Name" required />
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-2" for="lastName">Last Name:</label>
             <div class="col-sm-10">
-                @Html.EditorFor(m => m.lastName, new { id = "lastName", @class = "form-control" })
+                <input type="text" class="form-control" name="lastName" id="lastName" value='@Model.lastName' placeholder="Enter Last Name" required />
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-2" for="eMailAddress">E-Mail address:</label>
             <div class="col-sm-10">
-                @Html.EditorFor(m => m.emailAddress, new { id = "eMailAddress", @class = "form-control" })
+                <input type="email" class="form-control" name="emailAddress" id="eMailAddress" value='@Model.emailAddress' placeholder="Enter E-Mail Address" required />
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-2" for="mobileNo">Mobile No:</label>
             <div class="col-sm-10">
-                @Html.EditorFor(m => m.mobileNo, new { id = "mobileNo", @class = "form-control" })
+                <input type="text" class="form-control" name="mobileNo" id="mobileNo" value='@Model.mobileNo' placeholder="Enter Mobile No." required />
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <input type="submit" value="Submit" class="btn button btn-success"/>
+                <input type="submit" id="submitData" value="Submit" class="btn button btn-success"/>
                 <a href="@Url.Action("Index","Home")" class="btn btn-warning">Cancel</a>
             </div>
         </div>
         }
     </div>
 </div>
-<script>
-    $('#addNewRowButton').click(function (e) {
-        e.preventDefault();
-        if ($('#firstName').val().length < 1 && $('#lastName').val().length < 1 && $('#eMailAddress').val().length < 1 && $('#mobileNo').val().length < 1) {
-            $('#firstName').css('border-color', 'red');
-            $('#lastName').css('border-color', 'red');
-            $('#eMailAddress').css('border-color', 'red');
-            $('#mobileNo').css('border-color', 'red');
-            alert('Please fill all the fields...!');
-            return false;
-        }
-    });
-</script>

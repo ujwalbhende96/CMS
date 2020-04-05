@@ -31,12 +31,12 @@ namespace CMS.Web.Controllers
             if (_cmsModelObj.Id == 0)
             {
                 HttpResponseMessage response = GlobalVariables.webApiClient.PostAsJsonAsync("CMS", _cmsModelObj).Result;
-                TempData["SuccessMessage"] = "Saved Successfully";
+                TempData["SuccessMessage"] = "Contact Saved Successfully";
             }
             else
             {
                 HttpResponseMessage response = GlobalVariables.webApiClient.PutAsJsonAsync("CMS/" + _cmsModelObj.Id, _cmsModelObj).Result;
-                TempData["SuccessMessage"] = "Updated Successfully";
+                TempData["SuccessMessage"] = "Contact Updated Successfully";
             }
             return RedirectToAction("Index");
         }
@@ -44,7 +44,7 @@ namespace CMS.Web.Controllers
         public ActionResult Delete(int id)
         {
             HttpResponseMessage response = GlobalVariables.webApiClient.DeleteAsync("CMS/" + id.ToString()).Result;
-            TempData["SuccessMessage"] = "Deleted Successfully";
+            TempData["SuccessMessage"] = "Contact Deleted Successfully";
             return RedirectToAction("Index",GetContactList());
         }
 
