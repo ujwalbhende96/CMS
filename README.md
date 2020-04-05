@@ -27,3 +27,8 @@ Now, set ContactInformation solution as startup project so that both CMS.Web and
 
 I have created one static class in CMS.Web project to call http client class. We can use this throughout the project to make the connection.
 If each time we will create an object for http client in each call then request will exhaust the sockets available in heavy loads.
+
+In this project validations are provide for all the fields like name should be alphabetic, email should be in correct format and 
+mobile number should contain 10 numeric values.
+
+
