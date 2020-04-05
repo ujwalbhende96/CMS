@@ -15,7 +15,7 @@ namespace CMS.WebAPI.Controllers
     public class CMSController : ApiController
     {
         private CMSEntities cmsEntities = new CMSEntities();
-
+        
         // GET: api/CMS
         public IQueryable<ContactList> GetContactLists()
         {
