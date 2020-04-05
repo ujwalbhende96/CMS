@@ -1,0 +1,62 @@
+﻿@model IEnumerable<CMS.Web.Models.CMSModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table table-condensed">
+    <thead class="table-heading">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>E-Mail Id</th>
+            <th>Mobile No.</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.firstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.lastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.emailAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mobileNo)
+                </td>
+                <td>
+                    <a href="@Url.Action("InsertUpdateNewContact", "Home", new { id = item.Id})" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i> Edit</a>
+                    <a onclick="confirmDelete(@item.Id)" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Delete</a>
+                </td>
+            </tr>
+        }
+        <tr>
+            <td colspan="1">
+                <a href="@Url.Action("InsertUpdateNewContact","Home")" class="btn btn-primary" onclick="return validateData()"><i class="fa fa-plus"></i> Create New</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<script>
+    $(function () {
+        var successMessage = '@TempData["SuccessMessage"]'
+        if (successMessage != '')
+            alert(successMessage);
+    });
+
+    function confirmDelete(id) {
+        if (confirm("Delete Record?") == true) {
+            window.location.href = '@Url.Action("Delete","Home")/' + id;
+        } else {
+            alert("Cancelled by user");
+            return false;
+        }
+    }
+</script>
