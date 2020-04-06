@@ -31,4 +31,4 @@ If each time we will create an object for http client in each call then request 
 In this project validations are provide for all the fields like name should be alphabetic, email should be in correct format and 
 mobile number should contain 10 numeric values.
 
-
+Also, validation applied to restrict duplicate entry for an E-Mail address.
