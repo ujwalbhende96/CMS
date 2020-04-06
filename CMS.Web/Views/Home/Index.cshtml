@@ -38,9 +38,24 @@
             </tr>
         }
         <tr>
-            <td colspan="1">
-                <a href="@Url.Action("InsertUpdateNewContact","Home")" class="btn btn-primary" onclick="return validateData()"><i class="fa fa-plus"></i> Create New</a>
-            </td>
+            @using (Html.BeginForm("InsertUpdateNewContact", "Home", FormMethod.Post))
+            {
+                <td>
+                    <input type="text" class="form-control" name="firstName" id="firstName" value="" placeholder="Enter First Name" required />
+                </td>
+                <td>
+                    <input type="text" class="form-control" name="lastName" id="lastName" value="" placeholder="Enter Last Name" required />
+                </td>
+                <td>
+                    <input type="email" class="form-control" name="emailAddress" id="eMailAddress" value="" placeholder="Enter E-Mail Address" required />
+                </td>
+                <td>
+                    <input type="text" class="form-control" name="mobileNo" id="mobileNo" value="" placeholder="Enter Mobile No." required />
+                </td>
+                <td>
+                    <button id="submitData" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Add New Contact</button>
+                </td>
+            }
         </tr>
     </tbody>
 </table>

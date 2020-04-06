@@ -30,13 +30,27 @@ namespace CMS.Web.Controllers
         {
             if (_cmsModelObj.Id == 0)
             {
-                HttpResponseMessage response = GlobalVariables.webApiClient.PostAsJsonAsync("CMS", _cmsModelObj).Result;
-                TempData["SuccessMessage"] = "Contact Saved Successfully";
+                if (CheckEmailExist(_cmsModelObj))
+                {
+                    TempData["SuccessMessage"] = "E-Mail address already exists...!";
+                }
+                else
+                {
+                    HttpResponseMessage response = GlobalVariables.webApiClient.PostAsJsonAsync("CMS", _cmsModelObj).Result;
+                    TempData["SuccessMessage"] = "Contact Saved Successfully...!";
+                }
             }
             else
             {
-                HttpResponseMessage response = GlobalVariables.webApiClient.PutAsJsonAsync("CMS/" + _cmsModelObj.Id, _cmsModelObj).Result;
-                TempData["SuccessMessage"] = "Contact Updated Successfully";
+                if (CheckEmailExist(_cmsModelObj))
+                {
+                    TempData["SuccessMessage"] = "E-Mail address already exists...!";
+                }
+                else
+                {
+                    HttpResponseMessage response = GlobalVariables.webApiClient.PutAsJsonAsync("CMS/" + _cmsModelObj.Id, _cmsModelObj).Result;
+                    TempData["SuccessMessage"] = "Contact Updated Successfully...!";
+                }
             }
             return RedirectToAction("Index");
         }
@@ -44,7 +58,7 @@ namespace CMS.Web.Controllers
         public ActionResult Delete(int id)
         {
             HttpResponseMessage response = GlobalVariables.webApiClient.DeleteAsync("CMS/" + id.ToString()).Result;
-            TempData["SuccessMessage"] = "Contact Deleted Successfully";
+            TempData["SuccessMessage"] = "Contact Deleted Successfully...!";
             return RedirectToAction("Index",GetContactList());
         }
 
@@ -54,6 +68,17 @@ namespace CMS.Web.Controllers
             HttpResponseMessage response = GlobalVariables.webApiClient.GetAsync("CMS").Result;
             _cmsModel = response.Content.ReadAsAsync<IEnumerable<CMSModel>>().Result;
             return (_cmsModel);
+        }
+        
+        public bool CheckEmailExist(CMSModel _obj)
+        {
+            List<CMSModel> _objCMSModelList = GetContactList().ToList();
+            bool result = false;
+            foreach (CMSModel _objCMSModel in _objCMSModelList)
+            {
+                result = _objCMSModel.emailAddress.Equals(_obj.emailAddress);
+            }
+            return result;
         }
     }
 }

@@ -4,7 +4,7 @@
     var regExForMobileNo = /^[0-9]*$/;
     var regExForText = /^[a-zA-Z]+$/;
 
-    function validateData() {
+    $('#submitData').click(function () {
         if ($('#firstName').val().length < 1 && $('#lastName').val().length < 1 && $('#eMailAddress').val().length < 1 && $('#mobileNo').val().length < 1) {
             $('#firstName').css('border-color', 'red');
             $('#lastName').css('border-color', 'red');
@@ -13,7 +13,7 @@
             alert('Please fill all the fields...!');
             return false;
         }
-    }
+    });
 
     $('#firstName').on('input', function () {
         var inputText = this.value;
@@ -44,6 +44,7 @@
         if (!(regExForEmail.test(inputText))) {
             alert('Please Enter Valid E-Mail Address...!');
             $('#eMailAddress').css('border-color', 'red');
+            return false;
         }
         else {
             $('#eMailAddress').removeAttr('style');
@@ -67,6 +68,7 @@
         if ($('#mobileNo').val().length != 10) {
             alert('Please Enter Valid Mobile No...!');
             $('#mobileNo').css('border-color', 'red');
+            return false;
         }
         else {
             $('#mobileNo').removeAttr('style');
